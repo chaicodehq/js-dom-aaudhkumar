@@ -70,25 +70,73 @@
  *   // => ["red", "blue"]
  */
 export function addColors(element, ...colors) {
-  // Your code here
+  if(element== null ||
+    element == undefined) return -1 ; 
+
+    let num = 0 ; 
+  for(let  i = 0 ; i< colors.length ; i= i+ 1){
+    if(!element.classList.contains(`${colors[i]}`) ){
+      element.classList.add(`${colors[i]}`) ; 
+      num += 1  ; 
+    } 
+  }
+  return num ; 
+
+
 }
 
 export function removeColors(element, ...colors) {
-  // Your code here
+  if(element== null ||
+    element == undefined) return -1 ; 
+
+    let num = 0 ;
+    for(let  i = 0 ; i< colors.length ; i= i+ 1){
+    if(element.classList.contains(`${colors[i]}`) ){
+      element.classList.remove(`${colors[i]}`) ; 
+      num += 1  ; 
+    } 
+  }
+  return num ;
+
 }
 
 export function togglePattern(element, pattern) {
-  // Your code here
+  if(element== null ||
+    element == undefined) return null ; 
+element.classList.toggle(`pattern-${pattern}`) ; 
+ return element.classList.contains(`pattern-${pattern}`) ;
+
+
 }
 
 export function hasDesign(element, designName) {
-  // Your code here
+if(element== null ||
+    element == undefined) return false ; 
+
+    return element.classList.contains(`design-${designName}`) ; 
 }
 
 export function replaceDesign(element, oldDesign, newDesign) {
-  // Your code here
+  if(element== null ||
+    element == undefined) return false ; 
+        element.classList.add(`design-${newDesign}`) ; 
+  if(element.classList.contains(`design-${oldDesign}`)){
+    element.classList.remove(`design-${oldDesign}`) ; 
+    return true
+  }else{ return false ;}
+
 }
 
 export function getActiveColors(element) {
-  // Your code here
+let a = [] ; 
+if(element == null || element == undefined){
+  return [] ;
+}
+ let p  = element.classList ; 
+ for(let i = 0 ; i< p.length ; i++){
+  if(p[i].startsWith('color-')){
+  a.push(p[i].slice(6)) ; 
+  }
+ }
+ return a ;
 }

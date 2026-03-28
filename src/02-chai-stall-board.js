@@ -65,17 +65,51 @@
  *   // => "cutting" (cheapest chai gets "cheapest" class)
  */
 export function updateChaiPrice(document, chaiType, newPrice) {
-  // Your code here
+  if (
+    newPrice <= 0 ||
+    chaiType === "" ||
+    typeof chaiType != "string" ||
+    typeof newPrice != "number"
+  )
+    return false;
+  const ele = document.getElementById(`price-${chaiType}`);
+  if (ele === null) return false;
+  ele.textContent = `₹${newPrice}`;
+  return true;
 }
 
 export function getChaiPrice(document, chaiType) {
-  // Your code here
+  const element = document.getElementById(`price-${chaiType}`);
+  if (element === null) return null;
+
+  const number = Number.parseInt(element.textContent.slice(1));
+  return number;
 }
 
 export function updateStallName(document, newName) {
-  // Your code here
+  if (newName == "" ||
+     typeof newName != "string") return null;
+  const ele = document.querySelector(".stall-name");
+  if (ele === null) return null;
+  const old = ele.textContent;
+  ele.textContent = newName;
+  return old;
 }
 
 export function highlightCheapestChai(document) {
-  // Your code here
+  const ele = document.querySelectorAll(".chai-price");
+  let eleme;
+  let minimum = Infinity;
+  if (ele.length == 0) return null;
+  ele.forEach((element) => {
+    let num = Number.parseInt(element.textContent.slice(1));
+    element.classList.remove("cheapest");
+    if (minimum > num) {
+      minimum = num;
+      eleme = element;
+    }
+  });
+
+  eleme.classList.add("cheapest");
+  return eleme.getAttribute("data-chai");
 }
